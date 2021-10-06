@@ -1,0 +1,32 @@
+{
+	"name": "TF_API dotnet",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"runArgs": [
+		"--network",
+		"host",
+	],
+	"mounts": [
+		// Keep command history 
+		"source=ostf-bashhistory,target=/commandhistory,type=volume",
+		// Use hosts docker socket
+		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"		
+	],
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-dotnettools.csharp",
+		"ms-azuretools.vscode-docker",			
+		"hashicorp.terraform"
+	],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		5000,
+		5001
+	],
+}
